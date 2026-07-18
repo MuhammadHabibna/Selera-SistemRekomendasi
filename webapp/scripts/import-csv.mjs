@@ -154,6 +154,43 @@ async function main() {
     "item_idx,rank"
   );
 
+  // Tabel opsional (migration 002): item_stats & item_assoc.
+  try {
+    const stats = readCsv("item_stats.csv");
+    const assoc = readCsv("item_assoc.csv");
+    await supabase.from("item_assoc").delete().gte("item_idx", 0);
+    await importTable(
+      supabase,
+      "item_stats",
+      stats,
+      (r) => ({
+        item_idx: Number(r.item_idx),
+        avg_rating: Number(r.avg_rating),
+        review_count: Number(r.review_count),
+      }),
+      "item_idx"
+    );
+    await importTable(
+      supabase,
+      "item_assoc",
+      assoc,
+      (r) => ({
+        item_idx: Number(r.item_idx),
+        assoc_item_idx: Number(r.assoc_item_idx),
+        rank: Number(r.rank),
+        support_count: Number(r.support_count),
+        confidence: Number(r.confidence),
+        lift: Number(r.lift),
+      }),
+      "item_idx,rank"
+    );
+  } catch (err) {
+    console.warn(
+      "Lewati item_stats/item_assoc (jalankan migration 002 dulu?):",
+      err.message
+    );
+  }
+
   // Verifikasi jumlah baris akhir.
   for (const [table, expected] of [
     ["items", items.length],

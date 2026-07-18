@@ -604,3 +604,126 @@ button.ghost:hover { color: var(--accent); }
   .card-fixed { width: 200px; min-width: 200px; }
   .pick-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 }
+
+/* ---------- Popover "Kenapa ini?" (penjelasan AI) ---------- */
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.why-wrap { position: relative; display: inline-flex; }
+.why-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border: 1px solid #efe8fc;
+  background: linear-gradient(120deg, #faf7ff, #f4f0fd);
+  color: var(--accent);
+  border-radius: 999px;
+}
+.why-chip:hover { border-color: var(--accent-2); color: var(--accent); }
+.why-pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 240px;
+  background: #1c1a24;
+  color: #f3f0fa;
+  font-size: 12.5px;
+  line-height: 1.55;
+  padding: 11px 13px;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px -12px rgba(16, 16, 20, 0.5);
+  z-index: 30;
+  animation: fadeUp 0.22s var(--ease) both;
+}
+
+/* ---------- Onboarding: pilihan tipe pengguna ---------- */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+  margin: 8px 0 26px;
+}
+.type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  text-align: left;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 18px;
+  transition: all 0.2s var(--ease);
+}
+.type-card:hover { border-color: var(--accent-2); transform: translateY(-2px); }
+.type-card.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.16);
+}
+.type-label { font-weight: 700; font-size: 15px; color: var(--text); }
+.type-desc { font-size: 13px; color: var(--text-2); }
+
+/* ---------- Profil: stat tiles & distribusi rating ---------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+  max-width: 760px;
+}
+.stat-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.stat-num { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+.stat-sub { font-size: 13px; font-weight: 600; color: var(--text-2); }
+.stat-label { font-size: 12.5px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  max-width: 560px;
+}
+.chart-title { font-size: 15px; margin: 0 0 16px; }
+.dist { display: flex; flex-direction: column; gap: 10px; }
+.dist-row { display: flex; align-items: center; gap: 12px; }
+.dist-label { width: 68px; font-size: 12.5px; color: var(--text-2); flex-shrink: 0; }
+.dist-track {
+  flex: 1;
+  height: 14px;
+  background: #f1f1f4;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dist-bar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 0 4px 4px 0;
+  transition: width 0.6s var(--ease);
+}
+.dist-value { width: 26px; text-align: right; font-size: 12.5px; font-weight: 600; color: var(--text-2); flex-shrink: 0; }
+
+/* ---------- Rating katalog di kartu ---------- */
+.rating-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+.rating-star { color: var(--star); display: inline-flex; }
+.rating-count { font-weight: 500; color: var(--text-3); }

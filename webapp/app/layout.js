@@ -12,6 +12,9 @@ export const metadata = {
   title: "Selera — Rekomendasi Produk Personal",
   description:
     "Selera memahami seleramu: rekomendasi produk yang belajar dari like, rating, dan jelajahmu — dijelaskan oleh Generative AI.",
+  other: {
+    "dicoding:email": "muhammadhabibna@gmail.com",
+  },
   openGraph: {
     title: "Selera — Rekomendasi Produk Personal",
     description:

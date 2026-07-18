@@ -107,6 +107,21 @@ export async function GET() {
       .slice(0, ROW_SIZE)
       .map((s) => s.similar_item_idx);
 
+    // 3b) Association rules: "yang menyukai X juga menyukai" (co-occurrence
+    // antar user Fase 1; sinyal kolaboratif, beda dari similarity konten).
+    let assocIds = [];
+    if (topSeedIdx != null) {
+      const { data: assoc } = await supabase
+        .from("item_assoc")
+        .select("assoc_item_idx, lift")
+        .eq("item_idx", topSeedIdx)
+        .order("rank", { ascending: true })
+        .limit(ROW_SIZE);
+      assocIds = (assoc || [])
+        .map((a) => a.assoc_item_idx)
+        .filter((idx) => !seen.has(idx));
+    }
+
     // 4) Riwayat terakhir (distinct, urutan terbaru).
     const recentIds = [...new Set(inter.map((r) => r.item_idx))].slice(0, ROW_SIZE);
 
@@ -118,6 +133,7 @@ export async function GET() {
       ...new Set([
         ...forYouIds,
         ...becauseIds,
+        ...assocIds,
         ...recentIds,
         ...seeds.map(([idx]) => idx),
       ]),
@@ -128,6 +144,11 @@ export async function GET() {
       .in("item_idx", metaIds);
     if (metaErr) throw new Error(metaErr.message);
     const metaMap = new Map((meta || []).map((m) => [m.item_idx, m]));
+    const { data: statRows } = await supabase
+      .from("item_stats")
+      .select("item_idx, avg_rating, review_count")
+      .in("item_idx", metaIds);
+    const statMap = new Map((statRows || []).map((s) => [s.item_idx, s]));
     const toItems = (ids) =>
       ids
         .map((idx) => metaMap.get(idx))
@@ -136,6 +157,12 @@ export async function GET() {
           item_idx: m.item_idx,
           product_title: m.product_title,
           product_category: m.product_category,
+          avg_rating: statMap.get(m.item_idx)
+            ? statMap.get(m.item_idx).avg_rating
+            : null,
+          review_count: statMap.get(m.item_idx)
+            ? statMap.get(m.item_idx).review_count
+            : null,
         }));
 
     const based_on = seeds
@@ -162,6 +189,15 @@ export async function GET() {
         id: "because",
         title: "Karena kamu menyukai: " + shortTitle,
         items: toItems(becauseIds),
+      });
+    }
+    if (assocIds.length > 0 && topSeedTitle) {
+      const shortTitle =
+        topSeedTitle.length > 42 ? topSeedTitle.slice(0, 42) + "..." : topSeedTitle;
+      sections.push({
+        id: "assoc",
+        title: "Yang menyukai " + shortTitle + " juga menyukai",
+        items: toItems(assocIds),
       });
     }
     if (popular.length > 0) {
