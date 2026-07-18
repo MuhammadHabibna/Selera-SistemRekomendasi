@@ -1,8 +1,8 @@
-# Project Brief (Draf) — Selera: Sistem Rekomendasi Produk Personal
+# Project Brief (Draf) — PintarPilih: Sistem Rekomendasi Produk Personal
 
 ## Ringkasan
 
-"Selera" adalah aplikasi web rekomendasi produk dengan akun sungguhan
+"PintarPilih" (https://pintarpilih.vercel.app) adalah aplikasi web rekomendasi produk dengan akun sungguhan
 (Supabase Auth). Rekomendasi tiap user berbeda dan berubah mengikuti apa yang
 dia sukai, rating, klik, dan lihat — ditampilkan dalam antarmuka storefront
 modern (baris-baris tematik ala platform streaming), dan dilengkapi penjelasan

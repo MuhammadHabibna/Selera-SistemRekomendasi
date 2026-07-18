@@ -1,7 +1,9 @@
-# Selera-SistemRekomendasi
+# PintarPilih — Sistem Rekomendasi
 
 Sistem rekomendasi produk personal dengan penjelasan Generative AI (Google
 Gemini) — submission IDCamp Challenge.
+
+Live: https://pintarpilih.vercel.app
 
 ## Struktur
 

@@ -1,4 +1,6 @@
-# Selera — Rekomendasi Produk (Fase 2)
+# PintarPilih — Rekomendasi Produk (Fase 2)
+
+Live: https://pintarpilih.vercel.app
 
 Aplikasi Next.js + Supabase + Gemini di atas hasil riset rekomendasi Fase 1
 (`../recsys-software`). Personalisasi live dihitung dari tabel

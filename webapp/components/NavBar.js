@@ -18,7 +18,7 @@ export default function NavBar() {
 
   return (
     <nav className="nav">
-      <Link href="/" className="brand">Selera</Link>
+      <Link href="/" className="brand">PintarPilih</Link>
       <Link className={"link" + (pathname === "/" ? " active" : "")} href="/">
         Untukmu
       </Link>

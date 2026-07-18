@@ -42,7 +42,7 @@ export default function LoginPage() {
   return (
     <div className="auth-wrap">
       <form className="auth-box" onSubmit={handleSubmit}>
-        <span className="brand-lg">Selera</span>
+        <span className="brand-lg">PintarPilih</span>
         <h1 style={{ margin: 0, fontSize: 24 }}>
           {mode === "login" ? "Selamat datang kembali" : "Buat akunmu"}
         </h1>

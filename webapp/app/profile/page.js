@@ -79,7 +79,7 @@ export default function ProfilePage() {
       <span className="eyebrow">Profil</span>
       <h1>Aktivitasmu</h1>
       <p className="subtitle">
-        {email ? email + " — " : ""}sinyal-sinyal ini yang dipakai Selera untuk
+        {email ? email + " — " : ""}sinyal-sinyal ini yang dipakai PintarPilih untuk
         menghitung rekomendasimu.
       </p>
 
