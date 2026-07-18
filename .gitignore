@@ -1,0 +1,25 @@
+# Rahasia — JANGAN pernah di-commit
+.env
+.env.*
+!.env.example
+
+# Dependensi & build
+node_modules/
+.next/
+__pycache__/
+*.pyc
+
+# Dataset mentah (ratusan MB) — unduh dari sumber publik Amazon Reviews
+recsys-software/data/
+amazon_reviews_us_Software_v1_00.tsv/
+amazon_reviews_us_Software_v1_00.csv
+amazon_reviews_us_Software_v1_00.tsv
+
+# Artefak model besar (hasil training; bisa direproduksi via src/train.py)
+recsys-software/artifacts/*.pt
+recsys-software/artifacts/*.parquet
+recsys-software/artifacts/*.npz
+recsys-software/artifacts/*.pkl
+
+# Log
+*.log
